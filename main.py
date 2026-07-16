@@ -5,5 +5,4 @@ import interface
 def main():
     print("Hello World")
     Sabino=data.data()
-    Sabino.test()
 main()
