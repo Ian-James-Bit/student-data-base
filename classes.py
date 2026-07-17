@@ -1,5 +1,5 @@
 import sqlite3
-class classes:
+class Classes:
     #this class holds classes table and methods
     def __init__(self, database="my_database.db"):
         #connect to database or creates if doesnt exist
@@ -8,26 +8,39 @@ class classes:
         #making table
         #class ID needed in case two class name are the same; many to many relationship with student need connecting table in school
         sql_statement = """CREATE TABLE IF NOT EXISTS classes (
-                            Class_ID INTEGER,
+                            Class_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                             Class_Name TEXT NOT NULL
                         )"""
         self.cursor.execute(sql_statement)
         self.conn.commit()
 
-"""
-    def addClass(Class_Name):
 
-    def removeClass(Class_ID):
-        #remove class and related info
-
-    def editClassName(Class_ID,newClassName):
-        
-    def manageStudentEnrollment(Class_ID,Student_ID,Action):
-        #add or remove student from class
+    def addClass(self,Class_Name):
+        self.cursor.execute("INSERT INTO classes (Class_Name) VALUES(?)",(Class_Name,))
+        self.conn.commit()
     
-    def viewClasses():
-        #might split up into smaller functions, view all classes, view students in a class, view classes a student is enrolled in
+    # def removeClass(self,Class_ID):
+    #     #remove class and related info includes assignments grades ect
+    
 
-    def report(Class_ID):      
-        #given a class, shows studennts, assignments, class avg, highest and lowest grade
-"""
+    def editClassName(self,Class_ID,newClassName):
+        self.cursor.execute("UPDATE classes SET Class_Name = ? WHERE Class_ID =?",(newClassName,Class_ID))
+        self.conn.commit()
+
+    # def manageStudentEnrollment(self,Class_ID,Student_ID,Action):
+    #     #add or remove student from class
+    
+    def viewClasses(self):
+        self.cursor.execute("SELECT * FROM classes")
+        data=self.cursor.fetchall()
+        for row in data:
+            print(row)
+
+    #def viewStudentsClasses(self,Student_ID: int):
+        #see classes a student has
+
+    # def viewStudentsInClass(self,Class_ID):
+        #view students in a class
+
+    # def report(Class_ID):      
+    #     #given a class, shows studennts, assignments, class avg, highest and lowest grade

@@ -14,15 +14,12 @@ class Students:
         self.conn.commit()
 
     def addStudent(self,Student_Name):
-        print(Student_Name)
         self.cursor.execute("INSERT INTO students (Student_Name) VALUES(?)",(Student_Name,))
         self.conn.commit()
         
 
     def editStudents(self,Student_ID,Student_Name):
-        query="UPDATE students SET Student_Name = ? WHERE Student_ID =?"
-        data = (Student_Name, Student_ID)
-        self.cursor.execute(query,data)
+        self.cursor.execute("UPDATE students SET Student_Name = ? WHERE Student_ID =?",(Student_Name, Student_ID))
         self.conn.commit()
         print("Succefully changed")
 
@@ -39,12 +36,12 @@ class Students:
         for row in data:
             print(row)
         
-    def viewStudent(self,Student_ID: int):
+    def viewStudentByID(self,Student_ID: int):
         self.cursor.execute("SELECT * FROM students WHERE Student_ID = ?",(Student_ID,))
         row=self.cursor.fetchone()
         print(row)
 
-    def viewStudent(self,Student_Name: str):
+    def viewStudentByName(self,Student_Name: str):
         self.cursor.execute("SELECT * FROM students WHERE Student_Name = ?",(Student_Name,))
         row=self.cursor.fetchone()
         print(row)
