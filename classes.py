@@ -26,9 +26,6 @@ class Classes:
     def editClassName(self,Class_ID,newClassName):
         self.cursor.execute("UPDATE classes SET Class_Name = ? WHERE Class_ID =?",(newClassName,Class_ID))
         self.conn.commit()
-
-    # def manageStudentEnrollment(self,Class_ID,Student_ID,Action):
-    #     #add or remove student from class
     
     def viewClasses(self):
         self.cursor.execute("SELECT * FROM classes")
@@ -36,11 +33,4 @@ class Classes:
         for row in data:
             print(row)
 
-    #def viewStudentsClasses(self,Student_ID: int):
-        #see classes a student has
-
-    # def viewStudentsInClass(self,Class_ID):
-        #view students in a class
-
-    # def report(Class_ID):      
-    #     #given a class, shows studennts, assignments, class avg, highest and lowest grade
+    
