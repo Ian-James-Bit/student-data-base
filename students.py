@@ -1,5 +1,5 @@
 import sqlite3
-class students:
+class Students:
     #this class holds students table and methods
     def __init__(self, database="my_database.db"):
         #connect to database or creates if doesnt exist
@@ -12,18 +12,43 @@ class students:
                         )"""
         self.cursor.execute(sql_statement)
         self.conn.commit()
+
+    def addStudent(self,Student_Name):
+        print(Student_Name)
+        self.cursor.execute("INSERT INTO students (Student_Name) VALUES(?)",(Student_Name,))
+        self.conn.commit()
+        
+
+    def editStudents(self,Student_ID,Student_Name):
+        query="UPDATE students SET Student_Name = ? WHERE Student_ID =?"
+        data = (Student_Name, Student_ID)
+        self.cursor.execute(query,data)
+        self.conn.commit()
+        print("Succefully changed")
+
+
+    def removeStudent(self,Student_ID):
+        query="DELETE FROM students WHERE Student_ID =?"
+        self.cursor.execute(query,Student_ID)
+        self.conn.commit()
+        print("Succesfully removed.")
+
+    def viewStudents(self):
+        self.cursor.execute("SELECT * FROM students")
+        data=self.cursor.fetchall()
+        for row in data:
+            print(row)
+        
+    def viewStudent(self,Student_ID: int):
+        self.cursor.execute("SELECT * FROM students WHERE Student_ID = ?",(Student_ID,))
+        row=self.cursor.fetchone()
+        print(row)
+
+    def viewStudent(self,Student_Name: str):
+        self.cursor.execute("SELECT * FROM students WHERE Student_Name = ?",(Student_Name,))
+        row=self.cursor.fetchone()
+        print(row)
 """
-    def addStudent(Student_ID,Student_Name):
-
-    def editStudents(Student_ID):  
-
-    def removeStudent(Student_ID):
-
-    def viewStudents():
-
-    #search for a specific student, not sure how yet or by what
-    def viewStudent():
-    
     def report(Student_ID):
      #generate a report for a given student listing name, classes, assignments, grades, overall avg grade, avg/class
 """

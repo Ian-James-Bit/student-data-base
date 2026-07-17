@@ -1,8 +1,6 @@
-import data
-import edit
-import show
-import interface
+from school import School
 def main():
     print("Hello World")
-    Sabino=data.data()
+    Sabino=School()
+    Sabino.menu()
 main()
